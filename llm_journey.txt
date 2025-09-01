@@ -61,8 +61,9 @@ If two words tend to be neighbors in context, their embeddings will be closer.
 
 ![Credit: Oreilly](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/ovijtkihaiylg605av6x.png)
 
-**Why Embeddings Are Helpful ** 
-Embeddings allow us to measure the **semantic similarity** between words. They capture meaning beyond just surface-level text.  
+**Why Embeddings Are Helpful** 
+Embeddings allow us to measure the **semantic similarity** between words. They capture meaning beyond just surface-level text.
 
 
-Will update soon.... 
+
+
