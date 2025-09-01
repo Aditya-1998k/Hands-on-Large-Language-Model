@@ -188,6 +188,45 @@ Output: "Llamas are domesticated South American animals related to alpacas..."
 
 <img width="600" height="255" alt="image" src="https://github.com/user-attachments/assets/a1f8bd16-5931-4bf3-9f72-3c5d332907f9" />
 
+---
+
+# Large Language Models (LLMs)
+
+The term **"large"** is arbitrary — what is considered large today may be small tomorrow.  
+Currently, LLMs can range from **1 billion to 60+ billion parameters**.
+
+---
+
+#### Traditional ML vs LLM
+- Traditional machine learning: Models are trained for **specific tasks** (e.g., classification).  
+- LLMs: Trained to understand and generate natural language, enabling **general-purpose capabilities**.
+
+---
+
+### How LLMs are Created
+
+#### 1. Language Modeling (Pre-training)
+- The **first step** in building an LLM.  
+- Requires the **majority of computation and training time**.  
+- The output is often called a **foundation model** or **base model**.  
+- These models usually **do not follow instructions** directly.  
+
+#### 2. Fine-Tuning (Post-training)
+- The **second step**, where the base model is further trained on **narrower tasks**.  
+- Allows the model to **adapt to specific tasks** or exhibit **desired behaviors**.  
+- Fine-tuned models can become **instruction-following** or **chat models**.  
+
+---
+
+#### Applications of LLMs
+1. **Customer review classification**  
+2. **Identifying common issues** in support tickets  
+3. **Inspection of documents** (summarization, analysis, compliance)  
+4. **LLM-powered chatbots**  
+5. **Creative suggestions**, e.g., suggesting a dish to cook from a fridge picture  
+
+
+
 
 ---
 
