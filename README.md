@@ -156,14 +156,19 @@ Generative LLMs can be seen as **sequence-to-sequence machines**:
 
 ---
 
-## Fine-Tuning
+**Fine-Tuning**
 - **Fine-tuning** allows base models to become **instruction-following (instruct)** or **chat models**.  
 - These models can take a **user query (prompt)** and generate a more aligned **response**.  
 
+<img width="600" height="186" alt="image" src="https://github.com/user-attachments/assets/c88b503f-667f-4b88-b459-31e91a2a291a" />
+
+
 ---
 
-## Completion Models
+**Completion Models**
 Generative models are also referred to as **completion models**.  
+<img width="400" height="300" alt="image" src="https://github.com/user-attachments/assets/1c176546-6fec-4d7c-bc7b-cc7066ca5e59" />
+
 
 **Example:**  
 ```
@@ -176,13 +181,16 @@ Output: "Llamas are domesticated South American animals related to alpacas..."
 
 ---
 
-## Context Length & Context Window
+**Context Length & Context Window**
 - **Context length**: Maximum number of tokens a model can process.  
 - **Context window**: The actual span of tokens (input + output) the model can handle.  
 - These are critical to the capability of a generative model.  
 
+<img width="600" height="255" alt="image" src="https://github.com/user-attachments/assets/a1f8bd16-5931-4bf3-9f72-3c5d332907f9" />
+
+
 ---
 
-## 2023 — The Year of Generative AI
+**2023 — The Year of Generative AI**
 - **ChatGPT (GPT-3.5)** was released and quickly adopted by the public, gaining massive media coverage.  
 - Not only GPT-3.5, but several other models also made a significant impact in 2023.  
