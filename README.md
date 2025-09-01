@@ -233,4 +233,9 @@ Currently, LLMs can range from **1 billion to 60+ billion parameters**.
 
 ---
 
-
+#### LLM Frameworks
+1. Open-source LLMs require special backend packages to run locally, unlike closed-source models that you access via API.
+2. In 2023, many frameworks emerged, making it overwhelming to choose from hundreds.
+3. Instead of covering all, the focus is on building intuition so you can easily learn new frameworks.
+4. Backend packages (no GUI) are highlighted since they load and run LLMs efficiently.
+5. Examples include llama.cpp, LangChain, and Hugging Face Transformers.
