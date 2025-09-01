@@ -188,6 +188,9 @@ Output: "Llamas are domesticated South American animals related to alpacas..."
 
 <img width="600" height="255" alt="image" src="https://github.com/user-attachments/assets/a1f8bd16-5931-4bf3-9f72-3c5d332907f9" />
 
+**2023 — The Year of Generative AI**
+- **ChatGPT (GPT-3.5)** was released and quickly adopted by the public, gaining massive media coverage.  
+- Not only GPT-3.5, but several other models also made a significant impact in 2023.
 ---
 
 # Large Language Models (LLMs)
@@ -202,6 +205,9 @@ Currently, LLMs can range from **1 billion to 60+ billion parameters**.
 - LLMs: Trained to understand and generate natural language, enabling **general-purpose capabilities**.
 
 ---
+
+<img width="600" height="161" alt="image" src="https://github.com/user-attachments/assets/709afd8f-c5c8-4fe5-bc9d-c8199ca52da9" />
+
 
 ### How LLMs are Created
 
@@ -225,11 +231,6 @@ Currently, LLMs can range from **1 billion to 60+ billion parameters**.
 4. **LLM-powered chatbots**  
 5. **Creative suggestions**, e.g., suggesting a dish to cook from a fridge picture  
 
-
-
-
 ---
 
-**2023 — The Year of Generative AI**
-- **ChatGPT (GPT-3.5)** was released and quickly adopted by the public, gaining massive media coverage.  
-- Not only GPT-3.5, but several other models also made a significant impact in 2023.  
+
