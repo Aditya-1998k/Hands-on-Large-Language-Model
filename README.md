@@ -65,3 +65,124 @@ Example:
 ### Why Embeddings Are Helpful  
 - Capture semantic similarity between words  
 - Go beyond surface-level text meaning  
+
+### Types of Embeddings
+
+- **Sentence embeddings**  
+- **Word embeddings**  
+- **Document embeddings**
+
+`word2vec` generates embeddings only at the **word level**.
+
+---
+
+## Why Embeddings Are Important
+Embeddings are central to many NLP tasks:  
+1. Classification  
+2. Clustering  
+3. Semantic Search  
+4. Retrieval-Augmented Generation (RAG)  
+
+---
+
+## Static Nature of Word2Vec
+Training with `word2vec` creates **static embeddings**.  
+- Example: the word *bank* → always has the same embedding.  
+- But *bank* can mean **financial institution** or **riverbank**, depending on context.  
+
+Thus, embeddings need to change with context.  
+
+---
+
+## RNNs and Contextual Embeddings
+**RNNs (Recurrent Neural Networks)** are neural networks designed to model sequences.  
+
+They are used for two main tasks:  
+1. **Encoding**: representing an input sentence  
+2. **Decoding**: generating an output sentence  
+
+RNNs are **autoregressive**:  
+- When generating the next word, they rely on previously generated words.  
+- Problem: difficult for **long sentences** (information loss).  
+
+---
+
+## Attention Mechanism
+Introduced in 2014 to address RNN limitations.  
+
+- Allows the model to **focus on relevant parts** of the input sequence.  
+- Amplifies important signals.  
+- Selectively determines which words matter most in a sentence.
+
+# Attention is All You Need
+
+In 2017, a new architecture called the **Transformer** was introduced.  
+It is based solely on the **attention mechanism** and completely removes recurrence.  
+
+Key benefits:  
+- Enables **parallel training**, making it much faster than RNNs.  
+- Both encoder and decoder blocks revolve around **attention** rather than RNNs.  
+
+---
+
+## Transformer Architecture
+
+- **Encoder** = Self-Attention + Feedforward Neural Network  
+- **Decoder** = Masked Self-Attention + Encoder-Decoder Attention + Feedforward Neural Network  
+
+This design became the foundation of many impactful models such as **BERT** and **GPT-1**.  
+
+---
+
+## Encoder-Only Models
+Encoder-only transformers are designed for **understanding tasks**:  
+- Learn contextual embeddings for the entire input sequence.  
+- Commonly used for **classification**, **clustering**, and **semantic similarity**.  
+- Example: **BERT** (Bidirectional Encoder Representations from Transformers).  
+
+---
+
+## Decoder-Only Models
+Decoder-only transformers are designed for **generation tasks**:  
+- Autoregressive in nature (generate the next token step by step).  
+- Used for **text generation**, **summarization**, **chatbots**, etc.  
+- Examples: **GPT series**.  
+
+# Generative LLMs
+
+Generative LLMs can be seen as **sequence-to-sequence machines**:  
+- They take in some text and attempt to **autocomplete it**.  
+- Instead of just completing text, they can be trained to **answer questions** or perform specific tasks.  
+
+---
+
+## Fine-Tuning
+- **Fine-tuning** allows base models to become **instruction-following (instruct)** or **chat models**.  
+- These models can take a **user query (prompt)** and generate a more aligned **response**.  
+
+---
+
+## Completion Models
+Generative models are also referred to as **completion models**.  
+
+**Example:**  
+```
+User Query: "Tell me something about llamas"
+         ↓
+Generative LLM (Task: complete the input)
+         ↓
+Output: "Llamas are domesticated South American animals related to alpacas..."
+```
+
+---
+
+## Context Length & Context Window
+- **Context length**: Maximum number of tokens a model can process.  
+- **Context window**: The actual span of tokens (input + output) the model can handle.  
+- These are critical to the capability of a generative model.  
+
+---
+
+## 2023 — The Year of Generative AI
+- **ChatGPT (GPT-3.5)** was released and quickly adopted by the public, gaining massive media coverage.  
+- Not only GPT-3.5, but several other models also made a significant impact in 2023.  
