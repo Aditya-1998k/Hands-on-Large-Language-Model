@@ -239,3 +239,90 @@ Currently, LLMs can range from **1 billion to 60+ billion parameters**.
 3. Instead of covering all, the focus is on building intuition so you can easily learn new frameworks.
 4. Backend packages (no GUI) are highlighted since they load and run LLMs efficiently.
 5. Examples include llama.cpp, LangChain, and Hugging Face Transformers.
+
+---
+
+#### Generating you first text
+An important component of using language models is selecting them. 
+The main source for finding and downloading LLMs is the Hugging Face Hub. 
+Hugging Face is the organization behind the well-known Transformers package, 
+which for years has driven the development of language models in general.
+
+[Hugging Face Hub](https://huggingface.co/)
+
+When you use an LLM, two models are loaded:
+1. The generative model itself
+2. Its underlying tokenizer
+
+1. The tokenizer is in charge of splitting the input text into tokens before feeding it to the generative model.
+2. we use “microsoft/Phi-3-mini-4k-instruct” as the main path to the model.
+3. We can use transformers to load both the tokenizer and model.
+
+Note: assume you have an NVIDIA GPU (device_map="cuda") but you can choose a different device instead. (Using Colab)
+
+1. Installing Dependencies
+```python
+# %%capture
+# !pip install transformers>=4.40.1 accelerate>=0.27.2
+```
+
+2. The first step is to load our model onto the GPU for faster inference.
+Note that we load the model and tokenizer separately (although that isn't always necessary).
+
+```python
+from transformers import AutoModelForCausalLM, AutoTokenizer
+
+# Load model and tokenizer
+model = AutoModelForCausalLM.from_pretrained(
+    "microsoft/Phi-3-mini-4k-instruct",
+    device_map="cuda",
+    torch_dtype="auto",
+    trust_remote_code=False,
+)
+tokenizer = AutoTokenizer.from_pretrained("microsoft/Phi-3-mini-4k-instruct")
+```
+Running the code will start downloading the model and depending on your internet connection can take a couple of minutes.
+
+3. Although we now have enough to start generating text, there is a nice trick in transformers that simplifies the process,
+namely transformers.pipeline. 
+It encapsulates the model, tokenizer, and text generation process into a single function:
+
+```python
+from transformers import pipeline
+
+generator = pipeline(
+    "text-generation", 
+    model="microsoft/Phi-3-mini-4k-instruct"
+)
+```
+4. To generate our first text, let’s instruct the model to tell a joke about chickens.
+Our role is that of “user” and model role is of assistant
+we use the “content” key to define our prompt:
+
+```python
+prompt = "User: Create a funny joke about chickens.\nAssistant:"
+response = generator(prompt, max_new_tokens=100, do_sample=True, temperature=0.7)
+
+print(response[0]["generated_text"])
+```
+
+```
+output:
+User: Create a funny joke about chickens.
+Assistant: Why did the chicken join a band? Because it wanted to be a drumstick.
+```
+
+## Parameters
+
+- **return_full_text**  
+  If `True`, the output will include both the input (prompt) and the model’s generated output.  
+  If `False`, only the newly generated text is returned.  
+
+- **max_new_tokens**  
+  `max_new_tokens=N` → Generate at most **N tokens** after the prompt.  
+
+- **do_sample**  
+  Controls whether generation is **deterministic** or **stochastic (randomized)**.  
+  1. If `False` → The model always picks the token with the highest probability (**greedy decoding**).  
+  2. If `True` → The model samples from the probability distribution (**adds randomness, more diverse outputs**).  
+
