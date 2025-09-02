@@ -105,6 +105,17 @@ RNNs are **autoregressive**:
 - When generating the next word, they rely on previously generated words.  
 - Problem: difficult for **long sentences** (information loss).  
 
+```
+Input tokens:  x1 → x2 → x3 → x4
+   x1   → [h1] → 
+                ↓
+   x2   → [h2] → 
+                ↓
+   x3   → [h3] → 
+                ↓
+   x4   → [h4] → Output
+```
+
 ---
 
 ## Attention Mechanism
@@ -122,6 +133,15 @@ It is based solely on the **attention mechanism** and completely removes recurre
 Key benefits:  
 - Enables **parallel training**, making it much faster than RNNs.  
 - Both encoder and decoder blocks revolve around **attention** rather than RNNs.  
+
+```
+Input tokens:  x1    x2    x3    x4
+
+   x1 ──┐
+   x2 ──┼──► [Self-Attention] ──► Output1, Output2, Output3, Output4
+   x3 ──┤
+   x4 ──┘
+```
 
 ---
 
