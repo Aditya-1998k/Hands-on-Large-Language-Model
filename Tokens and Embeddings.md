@@ -299,6 +299,9 @@ Shape: (1, 4, 384)                                  Text Embedding:
 - RAG (Retrieval Augmented Generation) - Find relevant documents to feed into LLMs
 - Recommendation system - Suggest similar items based on text
 
+### Word2Vec & Contrastive Training
+Word2vec learns word embeddings by predicting wheather two words appear in the same context.
+Trained using sliding window on the text to generate the word pairs.
 
 
 
