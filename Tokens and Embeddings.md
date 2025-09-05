@@ -129,4 +129,141 @@ Note: A Language Model Holds Embeddings for the Vocabulary of Its Tokenizer
 After a tokenizer is initialized and trained, it is then used in the training process of its associated language model. 
 This is why a pretrained language model is linked with its tokenizer and can’t use a different tokenizer without training.
 
+Before beginning of the training process, these vectors are randomly intialized, but training process assign them
+the values that enables the useful behaviour they are trained to perform.
+
+<img width="600" height="321" alt="image" src="https://github.com/user-attachments/assets/4cdb444f-f95f-44dc-942a-a2fd707a4dee" />
+
+#### Contextualized Word Embeddings with Large Language Models
+Instead of representing each word or token with a static vector, language models create contextualized word embeddings
+that represent a word with different token  based on its context.
+
+What powers AI image generation system like DALL.E, Midjourney and stable diffusion?
+
+<img width="600" height="279" alt="image" src="https://github.com/user-attachments/assets/7805e038-f102-4e70-abf6-3f2a45efb5fc" />
+
+#### Let's Generate
+1. Load a tokenizer and model
+```python
+from transformer import AutoModel, AutoTokenizer
+
+# Load Tokenizer
+tokenizer = AutoTokenizer("microsoft/deberta-base")
+
+# Load Model
+model = AutoModel("microsoft/deberta-v3-xsmall")
+```
+
+- Tokenizer → Converts text into tokens (numbers).
+- Model → Neural network that converts tokens into embeddings.
+
+2. Tokenization
+```python
+tokens = tokenizer("Hello World", return_tensors="pt")
+```
+- `Hello World` get splitted into tokens
+- Returned a pytorch tensors for model processing
+
+3. Model Output
+```python
+# Process the token
+output = model(**tokens)[0]
+
+output.shape
+# torch.Size([1, 4, 384])
+```
+Shape Meaning
+- 1 = Batch size (We only gave one sentence)
+- 4 = tokens
+- 384 = each token is represented by 384-dimensional vectors
+
+4. Inspecting Tokens
+```
+for token in tokens["input_ids"][0]:
+    print(tokenizer.decode(token))
+
+# Output
+[CLS]
+Hello
+world
+[SEP]
+```
+
+Tokenizer added special tokens
+- [CLS] = classification token (at start)
+- [SEP] = seperator token (at end)
+
+So "Hello world" → actually became 4 tokens.
+
+5. Embedding Vectors
+Model Output
+```
+tensor([[
+[-3.3060, -0.0507, ..., 0.6932],   # [CLS]
+[ 0.8918,  0.0740, ..., 0.0751],   # Hello
+[ 0.0871,  0.6364, ..., 1.0157],   # world
+[-3.1624, -0.1436, ..., 0.7954]    # [SEP]
+]])
+```
+
+**ASCII Diagram**
+```python
+Text: "Hello world"
+        │
+        ▼
++-----------------+
+|   Tokenizer     |
++-----------------+
+        │
+        ▼
+Tokens: [CLS], "Hello", "world", [SEP]
+        │
+        ▼
+Token IDs: [101, 8667, 1362, 102]   # Example IDs
+        │
+        ▼
++-----------------+
+|   Embedding     |
+| (inside model)  |
++-----------------+
+        │
+        ▼
+Embeddings:
+[[-3.3060, -0.0507, ..., 0.6932],   # [CLS]
+ [ 0.8918,  0.0740, ..., 0.0751],   # Hello
+ [ 0.0871,  0.6364, ..., 1.0157],   # world
+ [-3.1624, -0.1436, ..., 0.7954]]   # [SEP]
+        │
+        ▼
+torch.Size([1, 4, 384])
+```
+
+### Text Embeddings (Sentence & Documents)
+- Token Embeddings : One vector per token
+- Text Embeddings : One vector per sentence
+
+Useful when we care about the meaning of the whole text, not just individual words.
+
+**How text embeddings are created?**
+1. Method 1 : Average all token embeddings into one vector
+2. Method 2 : Use a model trained specifically for text-embeddings (eg: Sentence-transformer model)
+
+Using Sentence Transformer Model
+
+```python
+from sentence_transformer import SentenceTransformer
+
+# Load the embedding model
+model = SentenceTransformer("sentence-transformers/all-mpnet-base-v2")
+
+# Convert sentence into embedding vectors
+vector = model.encode("Best Movie Ever!")
+
+print(vector.shape)
+# (768,)
+```
+
+
+
+
 
