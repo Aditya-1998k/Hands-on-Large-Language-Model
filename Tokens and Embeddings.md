@@ -303,7 +303,66 @@ Shape: (1, 4, 384)                                  Text Embedding:
 Word2vec learns word embeddings by predicting wheather two words appear in the same context.
 Trained using sliding window on the text to generate the word pairs.
 
+**Skip-Gram**
+The skip-gram model is a word embedding technique used in natural language processing to predict the surrounding words given a target word.
 
+1. Central word → paired with its neighbors.
+```
+Eg:
+If window size == 2:
+"not make a machine"
+Center = make
+Pairs = (make, not), (make, a), (make, machine)
+```
+2. Negative Sampling
+Add random words pairs - label as not neibours
+Prevent the model from cheating by always predicting 1 (Neighbour)
+Inspired by Noise contrastive Estimation.
 
+Noise contrastive estimation is a technique used in natural language processing to learn 
+high-quality vector representations by differentiating data from noise.
 
+3. Training process
+Initialized embeddings randomly (vocab size * embedding dimension).
+```
+For each pair: 
+input: Two word embeddings
+Output: 1 if neighbour else 0
 
+Grandually update embeddings so that :
+- similar words - close vectors
+- random words - distant vectors
+```
+
+**ASCII Diagram**
+```
+Text: "Thou shalt not make a machine in the likeness of a human mind"
+
+Sliding Window (size=2)
+       Center word = "make"
+       Neighbors = ["not", "a", "machine"]
+
+Training Pairs:
+  Positive (Skip-Gram):
+    (make, not) → 1
+    (make, a)   → 1
+    (make, machine) → 1
+
+  Negative (Random Sampling):
+    (make, banana) → 0
+    (make, elephant) → 0
+
++-------------------------------+
+|   Neural Network Classifier   |
+|   Input: (word1, word2)       |
+|   Output: 1 (neighbor) / 0    |
++-------------------------------+
+        │
+        ▼
+Updates Embedding Matrix:
+[vocab_size × embedding_dim]
+
+Final Result:
+- "make" and "machine" embeddings → close
+- "make" and "banana" embeddings → far apart
+```
