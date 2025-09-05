@@ -262,6 +262,43 @@ vector = model.encode("Best Movie Ever!")
 print(vector.shape)
 # (768,)
 ```
+- The embedding vector has 768 values.
+- This single vector represents the meaning of the sentence.
+
+**ASCII Diagram**
+```
+                 🔹 Token Embeddings                         🔹 Text Embeddings
+------------------------------------------------------------------------------------------
+Input: "Best movie ever!"                          Input: "Best movie ever!"
+        │                                                   │
+        ▼                                                   ▼
++---------------------+                             +---------------------------+
+|   Tokenizer + LM    |                             |   Text Embedding Model    |
++---------------------+                             | (e.g., all-mpnet-base-v2) |
+        │                                                   +-------------------+
+        ▼                                                   │
+Tokens: ["Best", "movie", "ever", [SEP]]                     ▼
+        │                                            Token Embeddings (internal):
+        ▼                                            [[-0.12, 0.56, ..., 0.88],   # Best
+Token Embeddings:                                    [ 0.34, 0.21, ..., -0.44],  # movie
+[[-0.12, 0.56, ..., 0.88],   # Best                 [ 0.77, -0.11, ..., 0.05]]   # ever
+ [ 0.34, 0.21, ..., -0.44],  # movie                        │
+ [ 0.77, -0.11, ..., 0.05],  # ever                         ▼
+ [-0.22, 0.18, ..., 0.14]]   # [SEP]              (Pooling / Special Layer)
+        │                                                   │
+        ▼                                                   ▼
+Shape: (1, 4, 384)                                  Text Embedding:
+                                                    [-0.231, 0.884, -0.114, ..., 0.672]
+                                                            Shape: (768,)
+
+```
+
+##### Application of Text Embeddings
+- Semantic Search - Find similar sentence/Documents
+- Categorization/Clustering - Group similar text together
+- RAG (Retrieval Augmented Generation) - Find relevant documents to feed into LLMs
+- Recommendation system - Suggest similar items based on text
+
 
 
 
