@@ -366,3 +366,107 @@ Final Result:
 - "make" and "machine" embeddings → close
 - "make" and "banana" embeddings → far apart
 ```
+
+### Recommending songs by Embeddings
+We will use word2vec algorithm to embed songs using human made music playlist.
+- Treat each songs as a word or token
+- Treat each playlist as a sentence
+
+Then Embedding recommend each song which appears together in playlist.
+
+<img width="600" height="127" alt="image" src="https://github.com/user-attachments/assets/d2fba05f-4543-4ec7-ac18-ef39df165f33" />
+
+About Dataset : [Link](https://www.cs.cornell.edu/~shuochen/lme/data_page.html)
+
+Training a song Embedding model
+1. Loading dataset and song metadata
+```python
+import pandas as pd
+from urllib import request
+
+# Get the playlist datafile
+data = request.urlopen("https://storage.googleapis.com/maps-premium/dataset/yes_complete/train.txt")
+
+# Parse the dataset files and Skip the first two lines as they contains only metadata
+lines = data.read().decode("utf-8").split("\n")[2:]
+
+# Remove playlist with one song
+playlists = [s.rstrip().split() for s in lines if len(s.split()) > 1]
+
+# Load Song metadata
+songs_file = request.urlopen('https://storage.googleapis.com/maps-premium/dataset/yes_complete/song_hash.txt')
+songs_file = songs_file.read().decode("uft-8").split("\n")
+songs = [s.rstrip().split("\t") for s in songs_file]
+songs_df = pd.DataFrame(data=songs, columns = ["id", "title", "artist"]
+songs_df = songs_df.set_index("id")
+```
+Will create Embeddings on playlist which will have song_ids and will use `songs_df` to get the song details.
+
+```python
+print( 'Playlist #1:\n ', playlists[0], '\n')
+print( 'Playlist #2:\n ', playlists[1])
+```
+Output
+```
+Playlist #1: ['0', '1', '2', '3', '4', '5', ..., '43']
+Playlist #2: ['78', '79', '80', '3', '62', ..., '210']
+```
+
+Let's train the Model
+```python
+from genism.models import word2vec
+
+# Train our Word2Vec model
+model = Word2Vec(
+    playlists,         # playlists = list of lists of song_ids
+    vector_size=32,    # size of embedding (dimension of vector space)
+    window=20,         # how many "neighbors" to consider on either side
+    negative=50,       # negative sampling
+    min_count=1,       # include all songs, even rare ones
+    workers=4          # parallelism
+)
+```
+That takes a minute or two to train and results in embeddings being calculated for each song that we have.
+```python
+song_id = 2172
+# Ask the model for songs similar to song #2172
+model.wv.most_similar(positive=str(song_id))
+```
+Output:
+```
+[('2976', 0.9977465271949768),
+ ('3167', 0.9977430701255798),
+ ('3094', 0.9975950717926025),
+ ('2640', 0.9966474175453186),
+ ('2849', 0.9963167905807495)]
+```
+```python
+print(songs_df.iloc[2172])
+```
+```
+title Fade To Black
+artist Metallica
+Name: 2172 , dtype: object
+```
+
+Method to get the song recommendation
+```python
+import numpy as np
+
+def print_recommendation(song_id):
+    similar_song = np.array(model.wv.most_similar(positive=str(song_id), topn=5)[:,0]
+    return song_df.iloc[similar_songs]
+
+print(print_recommendation(2172)
+```
+```
+id	    Title	             artist
+--------------------------------------
+11473	Little Guitars	     Van Halen
+3167	Unchained	         Van Halen
+5586	The Last in Lin      Dio
+5634	Mr. Brownstone	     Guns N’ Roses
+3094	Breaking the Law	 Judas Priest
+```
+
+
