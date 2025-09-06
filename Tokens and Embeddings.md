@@ -411,10 +411,13 @@ Output
 Playlist #1: ['0', '1', '2', '3', '4', '5', ..., '43']
 Playlist #2: ['78', '79', '80', '3', '62', ..., '210']
 ```
+```
+!pip install gensim
+```
 
 Let's train the Model
 ```python
-from genism.models import word2vec
+from gensim.models import word2vec
 
 # Train our Word2Vec model
 model = Word2Vec(
@@ -453,11 +456,12 @@ Method to get the song recommendation
 ```python
 import numpy as np
 
-def print_recommendation(song_id):
-    similar_song = np.array(model.wv.most_similar(positive=str(song_id), topn=5)[:,0]
-    return song_df.iloc[similar_songs]
+def print_recommendations(song_id):
+    similar_songs = np.array(model.wv.most_similar(positive=str(song_id),topn=5))[:,0]
+    return  songs_df.iloc[similar_songs]
 
-print(print_recommendation(2172)
+# Extract recommendations
+print_recommendations(2172)
 ```
 ```
 id	    Title	             artist
