@@ -395,9 +395,9 @@ playlists = [s.rstrip().split() for s in lines if len(s.split()) > 1]
 
 # Load Song metadata
 songs_file = request.urlopen('https://storage.googleapis.com/maps-premium/dataset/yes_complete/song_hash.txt')
-songs_file = songs_file.read().decode("uft-8").split("\n")
+songs_file = songs_file.read().decode("utf-8").split("\n")
 songs = [s.rstrip().split("\t") for s in songs_file]
-songs_df = pd.DataFrame(data=songs, columns = ["id", "title", "artist"]
+songs_df = pd.DataFrame(data=songs, columns = ["id", "title", "artist"])
 songs_df = songs_df.set_index("id")
 ```
 Will create Embeddings on playlist which will have song_ids and will use `songs_df` to get the song details.
