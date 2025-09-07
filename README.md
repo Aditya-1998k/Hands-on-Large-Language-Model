@@ -346,3 +346,7 @@ Assistant: Why did the chicken join a band? Because it wanted to be a drumstick.
   1. If `False` → The model always picks the token with the highest probability (**greedy decoding**).  
   2. If `True` → The model samples from the probability distribution (**adds randomness, more diverse outputs**).  
 
+---
+
+### Other Chapters:
+1. Chapter 2: [Tokens & Embeddings](https://github.com/Aditya-1998k/Hands-on-Large-Language-Model/blob/main/Tokens%20and%20Embeddings.md)
