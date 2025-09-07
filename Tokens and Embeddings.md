@@ -376,8 +376,8 @@ Then Embedding recommend each song which appears together in playlist.
 
 <img width="600" height="127" alt="image" src="https://github.com/user-attachments/assets/d2fba05f-4543-4ec7-ac18-ef39df165f33" />
 
-About Dataset : [Link](https://www.cs.cornell.edu/~shuochen/lme/data_page.html)
-Colab: [Colab Link](https://colab.research.google.com/drive/1LEuBkO416Ozq5AX2zCQX8c5waH4hNmu7#scrollTo=anBKHSPCUKLk)
+- About Dataset : [Link](https://www.cs.cornell.edu/~shuochen/lme/data_page.html)
+- Colab: [Colab Link](https://colab.research.google.com/drive/1LEuBkO416Ozq5AX2zCQX8c5waH4hNmu7#scrollTo=anBKHSPCUKLk)
 
 Training a song Embedding model
 1. Loading dataset and song metadata
